@@ -5,12 +5,12 @@ end.value <- 8
 
 # Concatenate the raw text presented in a proposal
 for (i in 1:end.value) {
-  text <- paste(proposals$content[[i]]$body, collapse = '')
-  proposals$text[[i]] <- text
+  text <- paste(proposals$Content[[i]]$body, collapse = '')
+  proposals$Text[[i]] <- text
 }
 # Analyze the sentiment using the NRC datasource and syuzhet
-sentiments <- get_nrc_sentiment(proposals$text)
+sentiments <- get_nrc_sentiment(proposals$Text)
 sentiment.data <- data.frame(sentiments)
 sentiment.analysis <- sentiment.data %>%
-  mutate(valence = positive / negative) %>%
+  mutate(Valence = positive / negative) %>%
   merge(proposals)

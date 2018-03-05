@@ -15,6 +15,7 @@
 # install.packages('tm')
 # install.packages('SnowballC')
 # install.packages('syuzhet')
+# install.packages('tidyverse')
 
 
 # library("shiny")
@@ -25,6 +26,7 @@ library(dplyr)
 library(tm)
 library(SnowballC)
 library(syuzhet)
+# library(tidyverse)
 #library(tidyr)
 #library(tidytext)
 # library("countrycode")

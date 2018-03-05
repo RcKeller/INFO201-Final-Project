@@ -10,18 +10,29 @@ GetProposals <- function() {
   model <- 'proposal'
   query <- '"year":"<2018"'
   populate <- '"body"'
-
+  
   resource <- sprintf('/%s/?query={%s}&populate=[%s]', model, query, populate)
   uri <- paste0(stf.api, resource)
-
+  
   response <- GET(uri)
-  proposals <- fromJSON(content(response, "text"))
-
+  proposals <-  fromJSON(httr::content(response, "text"))
+  # rownames(proposals) <- proposals[[1]]
+  
   # Select legacy proposal data
   data <- flatten(proposals) %>%
     filter(published == TRUE) %>%
     filter(length(body.legacy) > 0) %>%
-    select(title, year, quarter, asked, received, category, content = body.legacy)
+    select(
+      'Title' = title,
+      'Year' = year,
+      'Quarter' = quarter,
+      'Organization' = organization,
+      'Category' = category,
+      'Content' = body.legacy,
+      'Status' = status,
+      'Asked' = asked,
+      'Received' = received
+    )
 
   return(data)
 }
