@@ -11,6 +11,7 @@
 # install.packages("maps")
 # install.packages("sp")
 # install.packages("maptools")
+# install.packages('tidytext')
 
 
 # library("shiny")
@@ -18,7 +19,8 @@ library(Hmisc)
 library(httr)
 library(jsonlite)
 library(dplyr)
-library(tidyr)
+#library(tidyr)
+#library(tidytext)
 # library("countrycode")
 # library("ggplot2")
 # library("maps")
@@ -54,13 +56,12 @@ uri <- paste0(stf.api, resource)
 
 response <- GET(uri)
 proposals <- fromJSON(content(response, "text"))
-# body <- fromJSON(content(response, "text"))
 
-body.colnames <- c('title','body')
 data <- flatten(proposals) %>%
   filter(published == TRUE) %>%
   filter(length(body.legacy) > 0) %>%
   select(title, year, quarter, asked, received, category, content = body.legacy)
+  
   # flatten(content)
 # mutate(content = attach(content))
 # mutate(content = as.data.frame(content))
@@ -82,7 +83,7 @@ data <- flatten(proposals) %>%
 # test <- select(data$content, title)
 
 data$test = "test"
-for (i in 1:length(data$content)) {
+for (i in 1:168) {
   data$test[[i]] <- paste(data$content[[i]]$body, collapse = '')
 }
 #
