@@ -1,0 +1,15 @@
+# end.value is a temp variable - we'll only iterate through values
+# a few times so as to not kill our workstations when developing
+# end.value <- length(proposals$content)
+end.value <- 8
+
+# Concatenate the raw text presented in a proposal
+for (i in 1:end.value) {
+  text <- paste(proposals$content[[i]]$body, collapse = '')
+  proposals$text[[i]] <- text
+}
+# Analyze the sentiment using the NRC datasource and syuzhet
+sentiments <- get_nrc_sentiment(proposals$text)
+sentiment.data <- data.frame(sentiments)
+sentiment.analysis <- sentiment.data %>%
+  mutate(valence = positive / negative)
