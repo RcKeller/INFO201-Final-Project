@@ -12,4 +12,5 @@ for (i in 1:end.value) {
 sentiments <- get_nrc_sentiment(proposals$text)
 sentiment.data <- data.frame(sentiments)
 sentiment.analysis <- sentiment.data %>%
-  mutate(valence = positive / negative)
+  mutate(valence = positive / negative) %>%
+  merge(proposals)
