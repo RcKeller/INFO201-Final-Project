@@ -80,27 +80,9 @@ data <- flatten(proposals) %>%
 # test <- as.data.frame(data$body.legacy, check.names = FALSE, stringAsFactors = FALSE)
 # test <- data.frame(data$content, row.names = c('title','body'))
 # test <- select(data$content, title)
-#for (i in length(data)) {
-#  print(data[[i]]$title)
-  ## View(data$content)
-  # test <- select(data$content)
-  # View(test)
-  # test <- typeof(data[[i]])
-  # print(test)
-#}
-# View(data$content[[1]])
 
-#for (i in length(data)) {
-#  View(data[[i]])
-#}
-# View(data[[5]]$content)
-#for (i in length(data)) {
-#  paste(data$content[[i]]$body)
-#}
 data$test = "test"
-for (i in length(data)) {
-  # data[i, "test"] = data$content[[i]]$body
-  # data$test[[i]] = data$content[[i]]$body
-  #data$test[[i]] <- paste(data$content[[i]]$body)
-  data[i, "test"] <- data$content[[i]]$body
+for (i in 1:length(data$content)) {
+  data$test[[i]] <- paste(data$content[[i]]$body, collapse = '')
 }
+#
