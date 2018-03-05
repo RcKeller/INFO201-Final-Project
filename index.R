@@ -11,6 +11,11 @@
 # install.packages("maps")
 # install.packages("sp")
 # install.packages("maptools")
+# install.packages('tidytext')
+# install.packages('tm')
+# install.packages('SnowballC')
+# install.packages('syuzhet')
+# install.packages('tidyverse')
 
 
 # library("shiny")
@@ -18,7 +23,12 @@ library(Hmisc)
 library(httr)
 library(jsonlite)
 library(dplyr)
-library(tidyr)
+library(tm)
+library(SnowballC)
+library(syuzhet)
+# library(tidyverse)
+#library(tidyr)
+#library(tidytext)
 # library("countrycode")
 # library("ggplot2")
 # library("maps")
@@ -41,29 +51,6 @@ library(tidyr)
 # # START APPLICATION
 # shinyApp(ui = the.ui, server = the.server)
 
-
-# EX: "https://api.propublica.org/congress/v1/115/bills/hr21.json"
-# https://uwstf.org/v2/proposal/?query={"year":"<2018"}&populate=["body"]&select=["title","year","number","organization","category","asked","received","body"]
-stf.api <- "https://uwstf.org/v2"
-model <- 'proposal'
-query <- '"year":"<2018"'
-populate <- '"body"'
-
-resource <- sprintf('/%s/?query={%s}&populate=[%s]', model, query, populate)
-uri <- paste0(stf.api, resource)
-
-response <- GET(uri)
-proposals <- fromJSON(content(response, "text"))
-# body <- fromJSON(content(response, "text"))
-
-body.colnames <- c('title','body')
-data <- flatten(proposals) %>%
-  filter(published == TRUE) %>%
-  filter(length(body.legacy) > 0) %>%
-  select(title, year, quarter, asked, received, category, content = body.legacy)
-for (i in length(data)) {
-  View(data[[i]]$content)
-  # test <- typeof(data[[i]])
-  # print(test)
-}
-# View(data$content[[1]])
+source('./src/GetProposals.R')
+proposals <- GetProposals()
+source('./src/AnalyzeProposals.R')
