@@ -37,7 +37,7 @@ the.server <- function(input, output) {
     placeholder1()
   })
 
-  placeholder2 <- reactive({
+  histo.data <- reactive({
     return()
   })
 
@@ -45,10 +45,8 @@ the.server <- function(input, output) {
     dist <- input$dist
     n <- input$n
 
-    hist(placeholder2(),
-         main = 'Title of Histogram',
-         col = '#75AADB',
-         border = 'white')
+    hist(histo.data(),
+         main = 'Average Sentiment for Category')
   })
 
   output$summary <- renderTable({
