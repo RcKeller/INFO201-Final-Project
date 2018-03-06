@@ -24,7 +24,7 @@ the.server <- function(input, output) {
       )
     )
   })
-
+  
   placeholder1 <- reactive({
     positivity <- input$range
     year.filter <- input$years
@@ -32,27 +32,27 @@ the.server <- function(input, output) {
     filtered.data <- data
     return()
   })
-
+  
   output$table <- renderTable({
     placeholder1()
   })
-
+  
   histo.data <- reactive({
     return()
   })
-
+  
   output$graph <- renderPlot({
     dist <- input$dist
     n <- input$n
-
+    
     hist(histo.data(),
          main = 'Average Sentiment for Category')
   })
-
+  
   output$summary <- renderTable({
     placeholder3
   })
-
+  
 }
 
 the.server <- function(input, output) {
@@ -90,7 +90,7 @@ the.server <- function(input, output) {
       )
     )
   })
-
+  
   graphical.filters <- reactive({
     positivity <- input$range
     year.filter <- input$years
@@ -98,23 +98,23 @@ the.server <- function(input, output) {
     filtered.data <- data
     return()
   })
-
+  
   output$table <- renderTable({
     placeholder1()
   })
-
+  
   histo.data <- reactive({
     return()
   })
-# average, category, year
+  # average, category, year
   output$graph <- renderPlot({
     dist <- input$dist
     n <- input$n
     hist(analysis$anger)
   })
-
+  
   output$summary <- renderTable({
     placeholder3
   })
-
+  
 }

@@ -28,4 +28,20 @@ AnalyzeProposals <- function(proposals) {
   # NOTE: SOME VALUES MAY BE GENERIC. This is because we are using a placeholder iterator for development
   return(analysis)
 }
->>>>>>> 013de85fd664129d74e95c552ccdb7b9cf9a0499
+
+# end.value is a temp variable - we'll only iterate through values
+# a few times so as to not kill our workstations when developing
+# end.value <- length(proposals$content)
+end.value <- 8
+
+# Concatenate the raw text presented in a proposal
+for (i in 1:end.value) {
+  text <- paste(proposals$Content[[i]]$body, collapse = '')
+  proposals$Text[[i]] <- text
+}
+# Analyze the sentiment using the NRC datasource and syuzhet
+sentiments <- get_nrc_sentiment(proposals$Text)
+sentiment.data <- data.frame(sentiments)
+sentiment.analysis <- sentiment.data %>%
+  mutate(Valence = positive / negative) %>%
+  merge(proposals)

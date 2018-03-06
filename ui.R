@@ -1,7 +1,7 @@
 the.ui <- fluidPage(
   # App title ----
   titlePanel("Best AC Group's Final Project"),
-
+  
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
     # Sidebar panel for inputs
@@ -16,7 +16,7 @@ the.ui <- fluidPage(
         width = '200%',
         round = FALSE
       ),
-
+      
       checkboxGroupInput(
         'category',
         label = h3('Categories of Request to Include in Analysis'),
@@ -26,7 +26,7 @@ the.ui <- fluidPage(
       uiOutput('ui')
       
     ),
-
+    
     # Main panel for displaying outputs
     mainPanel(
       tabsetPanel(
