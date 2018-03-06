@@ -91,7 +91,7 @@ the.server <- function(input, output) {
     )
   })
 
-  placeholder1 <- reactive({
+  graphical.filters <- reactive({
     positivity <- input$range
     year.filter <- input$years
     categories <- input$category
@@ -103,18 +103,14 @@ the.server <- function(input, output) {
     placeholder1()
   })
 
-  placeholder2 <- reactive({
+  histo.data <- reactive({
     return()
   })
-
+# average, category, year
   output$graph <- renderPlot({
     dist <- input$dist
     n <- input$n
-
-    hist(placeholder2(),
-         main = 'Title of Histogram',
-         col = '#75AADB',
-         border = 'white')
+    hist(analysis$anger)
   })
 
   output$summary <- renderTable({

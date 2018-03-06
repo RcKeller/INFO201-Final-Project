@@ -33,7 +33,7 @@ the.ui <- fluidPage(
         type = 'tabs',
         id = 'tab',
         # Would be a historgram of the
-        tabPanel('Graphical Analyis', value = 'graph'),
+        tabPanel('Graphical Analyis', plotOutput("graph")),
         tabPanel('Tabular Analysis', value = 'table') ,
         tabPanel('Summary Table', value = 'summary')
       )
